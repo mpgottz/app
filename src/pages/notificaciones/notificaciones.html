@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Notificaciones</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+
+  <ion-toolbar>
+    <ion-buttons start>
+    </ion-buttons>
+    <ion-segment>
+      <ion-segment-button value="new">
+        Notificaciones
+      </ion-segment-button>
+      <ion-segment-button value="hot">
+        Guardadas
+      </ion-segment-button>
+    </ion-segment>
+    <ion-buttons end>
+      <!--button ion-button icon-only>
+        <ion-icon name="more"></ion-icon>
+      </button-->
+        <button ion-button block (click) = "presentLoading()">
+          <ion-icon ios="ios-refresh" md="md-refresh" ></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+
+</ion-header>
+
+<ion-content class="cards-bg">
+
+  <ion-card *ngFor="let user of users">         
+      
+    <!--img src="assets/img/nin-live.png"/-->
+
+    <img [src]="user.picture.large">
+
+    <ion-card-content>
+      <ion-card-title>
+        {{ user.name.first | uppercase }}
+      </ion-card-title>
+      <p>
+        {{user.email}}
+      </p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='star'></ion-icon>
+          Mirar
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='musical-notes'></ion-icon>
+          Guardar
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='share-alt'></ion-icon>
+          Compartir
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>
