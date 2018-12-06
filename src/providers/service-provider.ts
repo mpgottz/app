@@ -15,11 +15,32 @@ export class ServiceProvider {
 	//https://jsonplaceholder.typicode.com/posts
 
 	getData() {
-	  return this.http.get('https://randomuser.me/api/?results=5')
-	  .map(res => res.json())
-	  .toPromise()
-	  .catch(error =>{
-	      console.error(error);
-	    })
+		return this.http.get('https://randomuser.me/api/?results=1')
+		.map(res => res.json())
+		.toPromise()
+		.catch(error =>{
+			console.error(error);
+		})
 	}
+
+	getDataPersonal(valor) {
+
+		console.log(valor)
+		return this.http.get('https://randomuser.me/api/?results=5')
+		.map(res => res.json())
+		.toPromise()
+		.catch(error =>{
+			console.error(error);
+		})
+	}
+
+
 }
+
+
+
+
+
+
+
+

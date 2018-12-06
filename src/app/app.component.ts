@@ -3,6 +3,11 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import {
+  Push,
+  PushToken
+} from '@ionic/cloud-angular';
+
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
@@ -11,10 +16,12 @@ import { Notificaciones } from '../pages/notificaciones/notificaciones';
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Notificaciones;
+  rootPage: any = LoginPage;
+  push: any = [];
 
   pages: Array<{title: string, component: any}>;
 
@@ -23,7 +30,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Iniciar Sesión', component: LoginPage },
+      { title: 'Login', component: LoginPage },
       { title: 'Inicio', component: HomePage },
       { title: 'List', component: ListPage },
       { title: 'Notificaciones', component: Notificaciones }
@@ -45,4 +52,24 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  private registerToken(){
+    this.push.register().then((t: PushToken) => {
+      return this.push.saveToken(t,{
+        ignore_user: true
+      });
+    }).then((t: PushToken) => {
+      console.log('Token saved:', t.token);
+    });
+  }
+
+  private getNotifications(){
+    this.push.rx.notification()
+    .subscribe((msg) => {
+      alert(msg.title + ': ' + msg.text);
+    });
+  }
+
+
 }
+

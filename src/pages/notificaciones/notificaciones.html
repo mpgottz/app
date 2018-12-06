@@ -40,16 +40,16 @@
 
     <ion-card-content>
       <ion-card-title>
-        {{ user.name.first | uppercase }}
+        {{ user.content | uppercase }}
       </ion-card-title>
       <p>
-        {{user.email}}
+        {{user.title}}
       </p>
     </ion-card-content>
 
     <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="danger" icon-start>
+        <button ion-button clear small color="danger"  icon-start (click)="openModal({charNum:user.email})">
           <ion-icon name='star'></ion-icon>
           Mirar
         </button>
